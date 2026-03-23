@@ -1,0 +1,133 @@
+.body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.titulo {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    animation: fadeInDown 1s ease-out forwards;
+}
+
+.subtitulo {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fadeInDown 1s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 5px;
+    
+    animation: zoomIn 0.8s ease (0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 1.8s;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: #c0392b;
+    box-shadow: 0 0 20px #e74c3c;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(1.5);
+        box-shadow: 0 0 30px #ff6b6b;
+    }
+}
+
+.btn {
+    animation: zoomIn 0.8s forwards, breathe 2s infinite 2s ease-in-out;
+}
+
+@keyframes bgGradient {
+    0% {
+        background-color: blue;
+    }
+
+    50% {
+        background-color: blueviolet;
+    }
+
+    100% {
+        background-color: pink;
+    }
+}
+
+body {
+    animation: bgGradient 10s infinite;
+}
+
+@keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        opacity: 1;
+    }
+
+    20%,
+    22%,
+    24%,
+    55% {
+        opacity: 0.5;
+    }
+}
+
+.subtitulo {
+    animation: fadeInDown 1s ease-out forwards, flicker 3s infinite 2s;
+}
