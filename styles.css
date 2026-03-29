@@ -1,4 +1,5 @@
-.body {
+/* Configuración Base */
+body {
     margin: 0;
     height: 100vh;
     display: flex;
@@ -6,15 +7,19 @@
     align-items: center;
     background-color: #1a1a1a;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
+    /* BONUS PRO: Fondo con animación de color */
+    animation: backgroundShift 10s infinite alternate;
 }
 
 .container {
     text-align: center;
 }
 
-@keyframes fadeIn {
+/* --- KEYFRAMES --- */
+
+@keyframes fadeInDown {
     from {
         opacity: 0;
         transform: translateY(-50px);
@@ -26,108 +31,86 @@
     }
 }
 
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(187, 45, 59, 0.7);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(187, 45, 59, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(187, 45, 59, 0);
+    }
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-color: #1a1a1a;
+    }
+
+    100% {
+        background-color: #2c0202;
+    }
+}
+
+/* --- NIVELES --- */
+
+/* NIVEL 1: Título con fade + slide */
 .titulo {
     font-size: 4rem;
     margin-bottom: 10px;
     animation: fadeInDown 1s ease-out forwards;
 }
 
+/* NIVEL 2: Delay progresivo en subtítulo */
 .subtitulo {
     font-size: 1.5rem;
     opacity: 0;
-    animation: fadeInDown 1s ease-out forwards;
-    animation-delay: 0.8s;
+    /* Empieza invisible */
+    animation: fadeInDown 1s ease-out 0.5s forwards;
+    /* 0.5s de delay */
 }
 
-@keyframes zoomIn {
-    from {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
+/* NIVEL 3 y 5: Botón con escala y animación infinita */
 .btn {
     margin-top: 30px;
     padding: 15px 40px;
     font-size: 1.2rem;
     cursor: pointer;
+    background-color: #ff4444;
     border: none;
-    background-color: #e74c3c;
     color: white;
     border-radius: 5px;
-    
-    animation: zoomIn 0.8s ease (0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 1.8s;
-    transition: all 0.3s ease;
+    opacity: 0;
+
+    /* Entrada con escala (Nivel 3) + Respiración infinita (Nivel 5) */
+    /* Nota: Combinamos dos animaciones separadas por coma */
+    animation:
+        scaleIn 0.8s ease-out 1.2s forwards,
+        pulse 2s infinite 2s;
 }
 
+/* NIVEL 4: Hover interactivo */
 .btn:hover {
+    background-color: #ff0000;
     transform: scale(1.1);
-    background-color: #c0392b;
-    box-shadow: 0 0 20px #e74c3c;
-}
-
-@keyframes breathe {
-
-    0%,
-    100% {
-        transform: scale(1.1);
-    }
-
-    50% {
-        transform: scale(1.5);
-        box-shadow: 0 0 30px #ff6b6b;
-    }
-}
-
-.btn {
-    animation: zoomIn 0.8s forwards, breathe 2s infinite 2s ease-in-out;
-}
-
-@keyframes bgGradient {
-    0% {
-        background-color: blue;
-    }
-
-    50% {
-        background-color: blueviolet;
-    }
-
-    100% {
-        background-color: pink;
-    }
-}
-
-body {
-    animation: bgGradient 10s infinite;
-}
-
-@keyframes flicker {
-
-    0%,
-    19%,
-    21%,
-    23%,
-    25%,
-    54%,
-    56%,
-    100% {
-        opacity: 1;
-    }
-
-    20%,
-    22%,
-    24%,
-    55% {
-        opacity: 0.5;
-    }
-}
-
-.subtitulo {
-    animation: fadeInDown 1s ease-out forwards, flicker 3s infinite 2s;
+    /* El botón crece */
+    transition: 0.3s;
 }
